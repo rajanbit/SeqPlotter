@@ -27,6 +27,7 @@ class Sequence:
 	# store it as Sequence object i.e. Sequence('SeqID', 'Sequence')
 	@classmethod
 	def read_fasta(cls, file_path):
+		cls.records.clear()
 		with open(file_path, "r") as fasta:
 			seq = ""
 			for line in fasta.readlines():
@@ -39,12 +40,13 @@ class Sequence:
 					header = line[1:].strip()
 					seq = ""
 			cls(seqid=header, seq=seq)
+		return cls.records
 
 	# Calculate sequence length
 	def length(self):
 		return len(self.seq)
 
-	# Identify sequence composition
+	# Fetch sequence composition
 	def comp(self):
 		comp_dict = {}
 		for s in set(self.seq):
@@ -80,3 +82,9 @@ class Sequence:
 			return self.seq[start-1:end]
 		else:
 			return("Input valid arguments (start, end) for slicing")
+
+	# Clearing records
+	@classmethod
+	def clear(cls):
+		cls.records.clear()
+
