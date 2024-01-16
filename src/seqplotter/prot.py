@@ -1,4 +1,4 @@
-from SeqPlotter.sequence import Sequence
+from seqplotter.sequence import Sequence
 import matplotlib.pyplot as plt
 
 class Protein(Sequence):
