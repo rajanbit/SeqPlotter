@@ -2,6 +2,7 @@ from seqplotter.sequence import Sequence
 import matplotlib.pyplot as plt
 from collections import defaultdict
 import numpy as np
+from collections import Counter
 
 class DNA(Sequence):
 
@@ -89,9 +90,25 @@ class DNA(Sequence):
 		plt.legend(["A", "T", "G", "C"])
 		plt.show()
 
-#	def length_distribution_plot():
+	# Length distribution plot | BOXPLOT
+	@staticmethod
+	def length_distribution_plot(records):
+		distr_lis = []
+		for record in records:
+			distr_lis.append(float(record.length()))
+		plt.boxplot(distr_lis, patch_artist=True, medianprops=dict(color='red', linewidth=1.5))
+		plt.xticks([1], ["Length"])
+		plt.ylabel("Base pairs (bp)")
+		plt.show()
 
-#	def per_position_comp():
+	# Per sequence length distribution plot | BARPLOT
+	@staticmethod
+	def length_plot(records):
+		seq_dict = {}
+		for record in records:
+			seq_dict[record.seqid] = float(record.length())
+		DNA.barplot(seq_dict, "Sequences", "Length (in bp)")
+
 	
 class RNA(DNA):
 
