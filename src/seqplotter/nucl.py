@@ -109,6 +109,28 @@ class DNA(Sequence):
 			seq_dict[record.seqid] = float(record.length())
 		DNA.barplot(seq_dict, "Sequences", "Length (in bp)")
 
+	# K-mer frequency distribution plot | HISTOGRAM
+	def kmer_abundance_plot(self, k=3):
+		kmers = [self.seq[i:i+k] for i in range(len(self.seq)-k+1)]
+		kmers = Counter(kmers)
+		freq = list(kmers.values())
+		plt.hist(freq, bins=range(1, max(freq)+2), color="#1f77b4", edgecolor="black")
+		plt.xlabel("Frequency")
+		plt.ylabel("K-mers Count")
+		plt.show()
+
+	# Combined kmer frequency distribution plot | HISTOGRAM
+	@staticmethod
+	def combined_kmer_abundance_plot(records, k=3):
+		temp = Counter()
+		for record in records:
+			kmers = [record.seq[i:i+k] for i in range(len(record.seq)-k+1)]
+			temp += Counter(kmers)
+		freq = list(temp.values())
+		plt.hist(freq, bins=range(1, max(freq)+2), color="#1f77b4", edgecolor="black")
+		plt.xlabel("Frequency")
+		plt.ylabel("K-mers Count")
+		plt.show()
 	
 class RNA(DNA):
 
