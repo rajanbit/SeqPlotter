@@ -66,7 +66,7 @@ class DNA(Sequence):
 			nt_dict["C"].append(((comp["C"])/sum(comp.values()))*100)
 		plt.boxplot(nt_dict.values(), patch_artist=True, medianprops=dict(color='red', linewidth=1.5))
 		plt.xticks([1, 2, 3, 4], nt_dict.keys())
-		plt.xlabel("GC")
+		plt.xlabel("Nucleotides")
 		plt.ylabel("Percentage (%)")
 		plt.show()
 	

@@ -1,7 +1,8 @@
 from seqplotter.sequence import Sequence
 import matplotlib.pyplot as plt
+from collections import defaultdict
 
-class Protein(Sequence):
+class PROT(Sequence):
 
 	# Constructor
 	def __init__(self, seqid:str, seq:str):
@@ -27,3 +28,17 @@ class Protein(Sequence):
 		plt.xlabel(x_lab)
 		plt.ylabel(y_lab)
 		plt.show()
+
+	@staticmethod
+	def aa_distribution_plot(records):
+		aa_dict = defaultdict(list)
+		for record in records:
+			comp = record.comp()
+			for aa, freq in comp.items():
+				aa_dict[aa].append(((comp[aa])/sum(comp.values()))*100)
+		plt.boxplot(aa_dict.values(), patch_artist=True, medianprops=dict(color='red', linewidth=1.5))
+		plt.xticks(range(1, 21), aa_dict.keys())
+		plt.xlabel("Amino Acids")
+		plt.ylabel("Percentage (%)")
+		plt.show()
+
