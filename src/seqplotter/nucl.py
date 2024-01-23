@@ -92,22 +92,22 @@ class DNA(Sequence):
 
 	# Length distribution plot | BOXPLOT
 	@staticmethod
-	def length_distribution_plot(records):
+	def length_distribution_plot(records, y_lab="Base pairs (bp)"):
 		distr_lis = []
 		for record in records:
 			distr_lis.append(float(record.length()))
 		plt.boxplot(distr_lis, patch_artist=True, medianprops=dict(color='red', linewidth=1.5))
 		plt.xticks([1], ["Length"])
-		plt.ylabel("Base pairs (bp)")
+		plt.ylabel(y_lab)
 		plt.show()
 
 	# Per sequence length distribution plot | BARPLOT
 	@staticmethod
-	def length_plot(records):
+	def length_plot(records, y_lab="Length (in bp)"):
 		seq_dict = {}
 		for record in records:
 			seq_dict[record.seqid] = float(record.length())
-		DNA.barplot(seq_dict, "Sequences", "Length (in bp)")
+		DNA.barplot(seq_dict, "Sequences", y_lab)
 
 	# K-mer frequency distribution plot | HISTOGRAM
 	def kmer_abundance_plot(self, k=3):

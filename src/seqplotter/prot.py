@@ -1,6 +1,7 @@
 from seqplotter.sequence import Sequence
 import matplotlib.pyplot as plt
 from collections import defaultdict
+from seqplotter.nucl import DNA
 
 class PROT(Sequence):
 
@@ -29,6 +30,7 @@ class PROT(Sequence):
 		plt.ylabel(y_lab)
 		plt.show()
 
+	# Amino acids distribution plot | BOXPLOT
 	@staticmethod
 	def aa_distribution_plot(records):
 		aa_dict = defaultdict(list)
@@ -41,4 +43,16 @@ class PROT(Sequence):
 		plt.xlabel("Amino Acids")
 		plt.ylabel("Percentage (%)")
 		plt.show()
+
+	# Length distribution plot | BOXPLOT
+	@staticmethod
+	def length_distribution_plot(records):
+		DNA.length_distribution_plot(records, "Amino acids (aa)")
+
+	# Per sequence length distribution plot | BARPLOT
+	@staticmethod
+	def length_plot(records):
+		DNA.length_plot(records, "Length (in aa)")
+
+
 
