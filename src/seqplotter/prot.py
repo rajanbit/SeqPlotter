@@ -2,6 +2,7 @@ from seqplotter.sequence import Sequence
 import matplotlib.pyplot as plt
 from collections import defaultdict
 from seqplotter.nucl import DNA
+import pandas as pd
 
 class PROT(Sequence):
 
@@ -54,5 +55,19 @@ class PROT(Sequence):
 	def length_plot(records):
 		DNA.length_plot(records, "Length (in aa)")
 
-
+	# Per sequence amino acid distribution plot | STACKED BARPLOT
+	@staticmethod
+	def per_sequence_comp(records):
+		aa_dict = defaultdict(list)
+		for record in records:
+			aa_dict["SeqID"].append(record.seqid)
+			comp = record.comp()
+			for aa, freq in comp.items():
+				aa_dict[aa].append(((comp[aa])/sum(comp.values()))*100)
+		aa_df = pd.DataFrame(aa_dict)
+		aa_df.plot(x='SeqID', kind='bar', stacked=True, figsize=(10,6))
+		plt.xlabel("Sequences")
+		plt.ylabel("Percentage(%)")
+		plt.legend(loc = "lower right")
+		plt.show()
 
