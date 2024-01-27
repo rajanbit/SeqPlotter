@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 from seqplotter.nucl import DNA
 import pandas as pd
+from matplotlib.cm import get_cmap
 
 class PROT(Sequence):
 
@@ -65,7 +66,7 @@ class PROT(Sequence):
 			for aa, freq in comp.items():
 				aa_dict[aa].append(((comp[aa])/sum(comp.values()))*100)
 		aa_df = pd.DataFrame(aa_dict)
-		aa_df.plot(x='SeqID', kind='bar', stacked=True, figsize=(10,6))
+		aa_df.plot(x='SeqID', kind='bar', stacked=True, figsize=(10,6), color=get_cmap("tab20").colors)
 		plt.xlabel("Sequences")
 		plt.ylabel("Percentage(%)")
 		plt.legend(loc = "lower right")
