@@ -72,3 +72,15 @@ class PROT(Sequence):
 		plt.legend(loc = "lower right")
 		plt.show()
 
+	# Calculate molecular weight of a protein sequence
+	def mol_weight(self):
+		aa_dict = {"A":71.0779, "C":103.1429,"D":115.0874,"E":129.114,"F":147.1739,"G":57.0513,
+			"H":137.1393,"I":113.1576,"K":128.1723,"L":113.1576,"M":131.1961,"N":114.1026,
+			"P":97.1152,"Q":128.1292,"R":156.1857,"S":87.0773,"T":101.1039,"V":99.1311,
+			"W":186.2099,"Y":163.1733}
+		aa_count_dict = Counter(list(self.seq))
+		molwt = 18.0153
+		for aa in aa_dict:
+			molwt += aa_count_dict[aa]*aa_dict[aa]
+		return(round(molwt/1000, 2))
+
