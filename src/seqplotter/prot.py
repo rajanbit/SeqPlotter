@@ -4,6 +4,7 @@ from collections import defaultdict
 from seqplotter.nucl import DNA
 import pandas as pd
 from matplotlib.cm import get_cmap
+from collections import Counter
 
 class PROT(Sequence):
 
