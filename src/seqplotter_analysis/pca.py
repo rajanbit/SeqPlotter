@@ -37,9 +37,11 @@ def PCA(seq_matrix, n_comp=2):
 def plot_pca(pca_matrix, class_labels=None):
 	if class_labels == None:
 		class_labels = np.array(pca_matrix["sample"])
+	else:
+		class_labels = np.array(class_labels)
 	for class_label in set(class_labels):
 		class_indices = np.where(class_labels == class_label)[0]
-		plt.scatter(pca_matrix["matrix"][class_indices, 0], pca_matrix["matrix"][class_indices, 1], label=f"Class {class_label}")
+		plt.scatter(pca_matrix["matrix"][class_indices, 0], pca_matrix["matrix"][class_indices, 1], label=class_label)
 	plt.xlabel("PC-1")
 	plt.ylabel("PC-2")
 	plt.legend()
