@@ -1,2 +1,1 @@
-from seqplotter_analysis.pca import seq2feature
-from seqplotter_analysis.pca import PCA
+from seqplotter_analysis.pca import seq2feature, PCA, plot_pca
