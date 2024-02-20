@@ -1,3 +1,12 @@
+import numpy as np
+from collections import Counter
+from math import log2
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+from matplotlib.text import TextPath
+from matplotlib.patches import PathPatch
+from matplotlib.font_manager import FontProperties
+
 # Function to calculate bit score
 def _calculate_bit_score(data, bases):
 	nt_scores = []
@@ -23,3 +32,15 @@ def _base_info(base, color, property, x, y, yscale=1, ax=None):
 	if ax != None:
 		ax.add_artist(p)
 	return p
+
+# Base properties for plotting seq logo | DNA
+nts = {nt : TextPath((-0.30, 0), nt, size=1, prop=FontProperties(weight="bold")) for nt in "ATGC"}
+nt_clr = {'G': 'orange', 'A': 'limegreen', 'C': 'blue', 'T': 'red'}
+
+# Base properties for plotting seq logo | PROTEIN
+aas = {aa : TextPath((-0.30, 0), aa, size=1, prop=FontProperties(weight="bold")) for aa in "ACDEFGHIKLMNPQRSTWYVOU"}
+aa_clr = {'C': 'limegreen', 'G': 'limegreen','S': 'limegreen','T': 'limegreen','Y': 'limegreen',
+	'Q': 'purple','N': 'purple', 'K': 'blue','R': 'blue','H': 'blue', 'D': 'red','E': 'red',
+	'A':'black','V':'black','L':'black','I':'black','P':'black','W':'black','F':'black',
+	'M':'black','O':'yellow','U':'yellow'}
+
