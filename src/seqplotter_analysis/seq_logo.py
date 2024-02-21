@@ -44,3 +44,35 @@ aa_clr = {'C': 'limegreen', 'G': 'limegreen','S': 'limegreen','T': 'limegreen','
 	'A':'black','V':'black','L':'black','I':'black','P':'black','W':'black','F':'black',
 	'M':'black','O':'yellow','U':'yellow'}
 
+# Plotting seq logo
+def _plot_logo(bit_scores, color_dict, property):
+	fig, ax = plt.subplots(figsize=(10,3))
+	x, maxi = 1, 0
+	for scores in bit_scores:
+		y = 0
+		for base, score in scores:
+			_base_info(base, color_dict, property, x,y, score, ax)
+			y += score
+		x += 1
+		maxi = max(maxi, y)
+	plt.xticks(range(1,x))
+	plt.xlim((0, x)) 
+	plt.ylim((0, maxi)) 
+	plt.tight_layout()
+	plt.ylabel("Bits")
+	plt.xlabel("Base positions")
+	plt.show()
+
+# Function to plot seq logo
+def seq_logo(data, seq_type):
+	if len(set([len(rec.seq) for rec in data])) > 1:
+		raise ValueError ("The given sequence is not aligned")
+	elif seq_type not in ["DNA", "PROT"]:
+		raise ValueError ("Sequence type incorrectly specified")
+	elif seq_type == "DNA" and len(set([len(rec.seq) for rec in data])) == 1:
+		scores = _calculate_bit_score(data, list(nt_clr.keys()))
+		_plot_logo(scores, nt_clr, nts)
+	elif seq_type == "PROT" and len(set([len(rec.seq) for rec in data])) == 1:
+		scores = _calculate_bit_score(data, list(aa_clr.keys()))
+		_plot_logo(scores, aa_clr, aas)
+
