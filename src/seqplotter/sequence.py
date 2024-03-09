@@ -88,3 +88,15 @@ class Sequence:
 	def clear(cls):
 		cls.records.clear()
 
+	# Finding records using seqID
+	@classmethod
+	def where(cls, **kwargs):
+		data = {i.seqid:i.seq for i in cls.records}
+		for option, value in kwargs.items():
+			if option == "seqid" and value in data.keys():
+				return(data[value])
+			elif option == "seqid" and value not in data.keys():
+				raise KeyError(f'seqID "{value}" not found')
+			elif option != "seqid":
+				raise ValueError(f'Invalid option: {option}')
+

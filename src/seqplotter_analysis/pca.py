@@ -2,6 +2,7 @@ from collections import Counter
 from collections import defaultdict
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Function for converting sequence object to feature matrix
 def seq2feature(seq_data, k_size=3, min_seq=1):
@@ -31,3 +32,18 @@ def PCA(seq_matrix, n_comp=2):
 	pcs = np.dot(x, evecs)
 	return {"components":[f"PC-{i+1}" for i in range(n_comp)], "sample":seq_matrix["sample"], "matrix":np.real(pcs[:,:n_comp])}
 	#return pd.DataFrame(data=np.real(pcs[:,:n_comp]), index=seq_matrix["sample"], columns=[f"PC-{i+1}" for i in range(n_comp)])
+
+# Function to plot PCA plot
+def plot_pca(pca_matrix, class_labels=None):
+	if class_labels == None:
+		class_labels = np.array(pca_matrix["sample"])
+	else:
+		class_labels = np.array(class_labels)
+	for class_label in set(class_labels):
+		class_indices = np.where(class_labels == class_label)[0]
+		plt.scatter(pca_matrix["matrix"][class_indices, 0], pca_matrix["matrix"][class_indices, 1], label=class_label)
+	plt.xlabel("PC-1")
+	plt.ylabel("PC-2")
+	plt.legend()
+	plt.show()
+
