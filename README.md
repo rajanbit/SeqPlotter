@@ -23,7 +23,7 @@ git clone https://github.com/rajanbit/SeqPlotter.git
 cd SeqPlotter/
 python -m pip install --upgrade build
 python -m build
-pip install dist/SeqPlotter-0.1.0-py3-none-any.whl
+pip install dist/SeqPlotter-0.2.0-py3-none-any.whl
 ```
 
 **conda**
