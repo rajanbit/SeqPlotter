@@ -160,6 +160,29 @@ class DNA(Sequence):
 		elif set(super().comp().keys()).issubset(["A", "T", "G", "C"])==False:
 			raise TypeError("Gene sequence contain ambiguous nucleotides")
 
+	# Function to generate random DNA sequence with length=l and gc_frequency=g
+	@classmethod
+	def generate_random_seq(cls, l:int, gc:float, count=1):
+		if count == 1:
+			seq = ""
+			nt = ["A", "T", "G", "C"]
+			for i in range(l):
+				if uniform(0.01, 1.0) < gc:
+					seq += nt[randint(2, 3)]
+				else:
+					seq += nt[randint(0, 1)]
+			cls("random_seq", seq)
+		else:
+			for c in range(count):
+				seq = ""
+				nt = ["A", "T", "G", "C"]
+				for i in range(l):
+					if uniform(0.01, 1.0) < gc:
+						seq += nt[randint(2, 3)]
+					else:
+						seq += nt[randint(0, 1)]
+				cls(f"random_seq{c+1}", seq)
+
 class RNA(DNA):
 
 	# Constructor
