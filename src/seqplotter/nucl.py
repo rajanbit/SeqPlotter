@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 import numpy as np
 from collections import Counter
+from random import randint, uniform
 
 class DNA(Sequence):
 
